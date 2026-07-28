@@ -1,0 +1,113 @@
+# Assignment 13 - Functions & Flexible Arguments in Python
+
+# 1. Function with parameters
+def add_numbers(a, b):
+    return a + b
+
+print("----- 1. Function with parameters -----")
+print("Sum of 5 and 10:", add_numbers(5, 10))
+
+
+# 2. Default parameters
+def greet(name, message="Hello"):
+    print(f"{message}, {name}!")
+
+print("\n----- 2. Default parameters -----")
+greet("Ravi")                       
+greet("Anita", "Good Morning")     
+
+
+# 3. Keyword arguments usage
+def display_info(name, age, city):
+    print(f"Name: {name}, Age: {age}, City: {city}")
+
+print("\n----- 3. Keyword arguments usage -----")
+display_info(name="Karan", age=25, city="Hyderabad")
+display_info(city="Mumbai", name="Priya", age=22)      
+display_info(age=30, city="Delhi", name="Amit")       
+
+
+# 4. Using *args
+def sum_all(*args):
+    total = 0
+    for num in args:
+        total += num
+    return total
+
+print("\n----- 4. Using *args -----")
+print("Sum of (1,2,3):", sum_all(1, 2, 3))
+print("Sum of (10,20,30,40):", sum_all(10, 20, 30, 40))
+print("Sum of ():", sum_all())
+
+
+# 5. Using **kwargs
+def print_details(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print("\n----- 5. Using **kwargs -----")
+print_details(name="Suresh", age=28, course="Python", city="Chennai")
+
+
+# 6. Flexible function (number or string)
+def process_input(value):
+    if isinstance(value, (int, float)):
+        print(f"Input is a number. Square = {value ** 2}")
+    elif isinstance(value, str):
+        print(f"Input is a string. Uppercase = {value.upper()}")
+    else:
+        print("Unsupported input type")
+
+print("\n----- 6. Flexible function -----")
+process_input(5)
+process_input(3.5)
+process_input("hello world")
+
+
+# 7. Advanced function - default args + *args + **kwargs
+def calculate_total(base_price, discount=0, *extra_items, **options):
+    total = base_price - discount
+
+    for item_price in extra_items:
+        total += item_price
+
+    if "tax_percent" in options:
+        tax = total * (options["tax_percent"] / 100)
+        total += tax
+
+    print(f"Base price: {base_price}, Discount: {discount}, Extra items: {extra_items}")
+    if "tax_percent" in options:
+        print(f"Tax applied: {options['tax_percent']}%")
+    print("Final total:", total)
+
+print("\n----- 7. Advanced function (default + *args + **kwargs) -----")
+calculate_total(1000)
+calculate_total(1000, 100)
+calculate_total(1000, 100, 200, 150, tax_percent=5)
+
+
+# 8. Lambda functions
+add = lambda a, b: a + b
+square = lambda x: x ** 2
+
+print("\n----- 8. Lambda functions -----")
+print("Add 4 + 6 =", add(4, 6))
+print("Square of 7 =", square(7))
+
+
+# 9. Map function - square all elements in a list
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = list(map(lambda x: x ** 2, numbers))
+
+print("\n----- 9. Map function -----")
+print("Original list:", numbers)
+print("Squared list:", squared_numbers)
+
+
+# 10. Filter function - extract even numbers from a list
+mixed_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+even_numbers = list(filter(lambda x: x % 2 == 0, mixed_numbers))
+
+print("\n----- 10. Filter function -----")
+print("Original list:", mixed_numbers)
+print("Even numbers:", even_numbers)
