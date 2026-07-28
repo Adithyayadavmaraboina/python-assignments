@@ -1,0 +1,130 @@
+# Assignment 15 - Dictionaries in Python
+
+# 1. Create a dictionary (Student ID -> Name)
+students = {
+    101: "Amit",
+    102: "Priya",
+    103: "Karan",
+    104: "Anjali",
+    105: "Suresh"
+}
+
+print("----- 1. Original dictionary -----")
+print(students)
+
+
+# 1.1 Add new entries
+students[106] = "Meera"
+students[107] = "Ravi"
+
+print("\n----- 1.1 After adding new entries -----")
+print(students)
+
+
+# 1.2 Update existing values
+students[101] = "Amit Kumar"
+
+print("\n----- 1.2 After updating student 101 -----")
+print(students)
+
+
+# 1.3 Access values
+print("\n----- 1.3 Access values -----")
+print("Student with ID 102:", students[102])
+print("All student names:", list(students.values()))
+
+
+# 1.4 Iterate through dictionary
+print("\n----- 1.4 Iterate through dictionary -----")
+for student_id, name in students.items():
+    print(f"ID: {student_id}, Name: {name}")
+
+
+# 1.5 Print only keys
+print("\n----- 1.5 Print only keys (Student IDs) -----")
+print(list(students.keys()))
+
+
+# 1.6 Print only values
+print("\n----- 1.6 Print only values (Student Names) -----")
+print(list(students.values()))
+
+
+# 1.7 Create a nested dictionary
+students_detailed = {
+    101: {"name": "Amit", "age": 22},
+    102: {"name": "Priya", "age": 21},
+    103: {"name": "Karan", "age": 23}
+}
+
+print("\n----- 1.7 Nested dictionary -----")
+print(students_detailed)
+
+
+# 1.8 Access nested values
+print("\n----- 1.8 Access nested values -----")
+print("Name of student 101:", students_detailed[101]["name"])
+print("Age of student 101:", students_detailed[101]["age"])
+
+
+# 1.9 Delete elements
+print("\n----- 1.9 Delete elements -----")
+
+# using del
+del students[107]
+print("After del (removed 107):", students)
+
+# using popitem() - removes the last inserted item
+removed_item = students.popitem()
+print("After popitem() (removed last item:", removed_item, "):", students)
+
+# using pop() - removes a specific key
+popped_value = students.pop(103)
+print("After pop(103) (removed value:", popped_value, "):", students)
+
+
+# 2. Check key existence
+print("\n----- 2. Check key existence -----")
+check_id = 102
+if check_id in students:
+    print(f"Student ID {check_id} exists. Name: {students[check_id]}")
+else:
+    print(f"Student ID {check_id} does not exist")
+
+check_id2 = 999
+if check_id2 in students:
+    print(f"Student ID {check_id2} exists. Name: {students[check_id2]}")
+else:
+    print(f"Student ID {check_id2} does not exist")
+
+
+# 3. Count entries
+print("\n----- 3. Count entries -----")
+print("Total number of students:", len(students))
+
+
+# 4. Merge two dictionaries
+print("\n----- 4. Merge two dictionaries -----")
+
+dict1 = {201: "Kiran", 202: "Neha"}
+dict2 = {203: "Vikram", 204: "Divya"}
+
+merged_dict = {**dict1, **dict2}
+print("Dictionary 1:", dict1)
+print("Dictionary 2:", dict2)
+print("Merged dictionary:", merged_dict)
+
+
+# 5. Dictionary comprehension (numbers -> squares)
+print("\n----- 5. Dictionary comprehension -----")
+squares_dict = {num: num ** 2 for num in range(1, 11)}
+print(squares_dict)
+
+
+# 6. Reverse dictionary (name -> ID)
+print("\n----- 6. Reverse dictionary -----")
+original_dict = {101: "Amit", 102: "Priya", 103: "Karan"}
+reversed_dict = {value: key for key, value in original_dict.items()}
+
+print("Original (ID -> Name):", original_dict)
+print("Reversed (Name -> ID):", reversed_dict)
