@@ -1,0 +1,51 @@
+#1 print your name:
+print("my name is Adithya")
+#2 comments in python
+#single line comments
+"""
+This is a multiline comments.
+triple qoutes are used for multiline comments
+"""
+#3 basic data types
+a=5#integer
+b=10.5#float
+c=False #boolean
+d="hello"#string
+e="B"#sibgle character string
+print(type(a))
+print(type(b))
+print(type(c))
+print(type(d))
+print(type(e))
+#4.Local vs Global Variables 
+num = 15   # global variable
+def show():
+    num = 10   # local variable, same name as global
+    print("local num =", num)
+show()
+print("global num =", num)
+def change():
+    global num
+    num = 20
+    print("inside function =", num)
+change()
+print("after change =", num)
+
+#5. Dynamic typing
+value = 100
+print(value, type(value))
+
+value = 12.34
+print(value, type(value))
+
+value = "python"
+print(value, type(value))
+
+value = False
+print(value, type(value))
+
+# Q6. Taking user input
+name = input("Enter your name: ")
+age = input("Enter your age: ")
+
+print("Hello", name, "your age is", age)
