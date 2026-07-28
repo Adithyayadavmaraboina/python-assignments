@@ -1,0 +1,230 @@
+# Assignment 8 - Encapsulation & Data Control in Python
+
+# 1. Create a simple class with getter and setter methods
+
+class Student:
+    def __init__(self):
+        self.name = ""
+        self.age = 0
+
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+    def set_age(self, age):
+        self.age = age
+
+    def get_age(self):
+        return self.age
+
+
+student1 = Student()
+student1.set_name("Riya")
+student1.set_age(20)
+
+print("Student name:", student1.get_name())
+print("Student age:", student1.get_age())
+
+
+# 2. Validation using methods
+
+class Student2:
+    def __init__(self):
+        self.name = ""
+        self.age = 0
+
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+    def set_age(self, age):
+        if age > 0:
+            self.age = age
+        else:
+            print("Error: Age must be greater than 0")
+
+    def get_age(self):
+        return self.age
+
+
+student2 = Student2()
+student2.set_name("Karan")
+student2.set_age(22)
+print("\nStudent name:", student2.get_name())
+print("Student age:", student2.get_age())
+
+print("\nTrying to set invalid age:")
+student2.set_age(-5)
+print("Age remains:", student2.get_age())
+
+
+# 3. Property decorator with getter and setter
+
+class Student3:
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        if value > 0:
+            self._age = value
+        else:
+            print("Error: Age must be greater than 0")
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+
+student3 = Student3("Anjali", 21)
+print("\nStudent name:", student3.name)
+print("Student age:", student3.age)
+
+student3.age = 25
+print("Updated age:", student3.age)
+
+print("\nTrying to set invalid age using property:")
+student3.age = -10
+print("Age remains:", student3.age)
+
+
+# 4. Read-only property
+
+class Employee:
+    def __init__(self, emp_id, name):
+        self._id = emp_id
+        self.name = name
+
+    @property
+    def id(self):
+        return self._id
+
+
+emp1 = Employee(101, "Suresh")
+print("\nEmployee ID:", emp1.id)
+print("Employee Name:", emp1.name)
+
+print("\nTrying to modify read-only id:")
+try:
+    emp1.id = 202
+except AttributeError as e:
+    print("Error:", e)
+
+
+# 5. Bank account system
+
+class BankAccount:
+    def __init__(self, account_holder, balance=0):
+        self.account_holder = account_holder
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited {amount}. New balance: {self.balance}")
+        else:
+            print("Error: Deposit amount must be positive")
+
+    def withdraw(self, amount):
+        if amount <= 0:
+            print("Error: Withdrawal amount must be positive")
+        elif amount > self.balance:
+            print("Error: Insufficient balance")
+        else:
+            self.balance -= amount
+            print(f"Withdrew {amount}. New balance: {self.balance}")
+
+
+account1 = BankAccount("Meera", 1000)
+print("\nAccount holder:", account1.account_holder)
+print("Initial balance:", account1.balance)
+
+account1.deposit(500)
+account1.withdraw(300)
+account1.withdraw(5000)   # should fail, insufficient balance
+account1.deposit(-100)    # should fail, invalid amount
+
+
+# 6. Internal variables (prefix with _)
+
+class Config:
+    def __init__(self):
+        self.public_setting = "visible to everyone"
+        self._internal_setting = "meant for internal use only"
+
+    def show_internal(self):
+        print("Internal setting (accessed properly through a method):", self._internal_setting)
+
+
+config1 = Config()
+print("\nPublic setting:", config1.public_setting)
+
+# it CAN still be accessed directly, even though it's not meant to be
+print("Internal setting (accessed directly, which we shouldn't do):", config1._internal_setting)
+
+config1.show_internal()
+
+
+# 7. Computed property
+
+class Rectangle:
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    @property
+    def area(self):
+        return self.length * self.width
+
+
+rect1 = Rectangle(10, 5)
+print("\nRectangle length:", rect1.length)
+print("Rectangle width:", rect1.width)
+print("Rectangle area (computed automatically):", rect1.area)
+
+rect1.length = 20
+print("\nAfter changing length to 20:")
+print("Updated area:", rect1.area)
+
+
+# 8. Password validation system
+
+class Password:
+    def __init__(self, password):
+        self._password = ""
+        self.set_password(password)
+
+    def set_password(self, password):
+        if len(password) < 8:
+            print("Error: Password must be at least 8 characters long")
+            return
+        if not any(char.isdigit() for char in password):
+            print("Error: Password must contain at least one number")
+            return
+        self._password = password
+        print("Password set successfully")
+
+    def get_password(self):
+        return self._password
+
+
+print("\nTesting password validation:")
+
+pwd1 = Password("abc123")           # too short
+pwd2 = Password("abcdefgh")         # no number
+pwd3 = Password("abcdef123")        # valid
+
+print("Final password for pwd3:", pwd3.get_password())
