@@ -1,0 +1,197 @@
+# Exception Handling in Python
+
+# 1. Generate an exception 
+print("----- 1. Generate an exception (unhandled) -----")
+print("This code would crash if run: 10 / 0")
+print("Error: ZeroDivisionError: division by zero")
+
+
+# 2. Handle the exception using try/except
+print("\n----- 2. Handle the exception -----")
+try:
+    a = 10
+    b = 0
+    result = a / b
+    print("Result:", result)
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero")
+
+
+# 3. Multiple except blocks
+print("\n----- 3. Multiple except blocks -----")
+
+def divide_numbers():
+    try:
+        num1 = int(input("Enter numerator: "))
+        num2 = int(input("Enter denominator: "))
+        result = num1 / num2
+        print("Result:", result)
+    except ZeroDivisionError:
+        print("Error: Cannot divide by zero")
+    except ValueError:
+        print("Error: Invalid input, please enter numbers only")
+
+
+
+
+# 4. Raise an exception manually
+print("\n----- 4. Raise an exception manually -----")
+
+def check_age(age):
+    if age < 18:
+        raise ValueError("Age must be 18 or above to register")
+    else:
+        print("Age is valid:", age)
+
+try:
+    check_age(15)
+except ValueError as e:
+    print("Error:", e)
+
+check_age(20)
+
+
+# 5. Function that always raises an exception
+print("\n----- 5. Function that always raises an exception -----")
+
+def always_fails():
+    raise RuntimeError("This function always fails")
+
+# Calling without handling (would crash the program) - shown here inside a try just for demo purposes
+print("Calling without handling would crash the program with RuntimeError")
+
+# Calling with proper handling
+try:
+    always_fails()
+except RuntimeError as e:
+    print("Handled properly. Error:", e)
+
+
+# 6. Create your own custom exception class
+print("\n----- 6. Custom exception: InsufficientBalanceError -----")
+
+class InsufficientBalanceError(Exception):
+    def __init__(self, message="Insufficient balance for this transaction"):
+        self.message = message
+        super().__init__(self.message)
+
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientBalanceError(f"Cannot withdraw {amount}, balance is only {self.balance}")
+        self.balance -= amount
+        print(f"Withdrew {amount}. Remaining balance: {self.balance}")
+
+account = BankAccount(1000)
+try:
+    account.withdraw(500)
+    account.withdraw(800)   
+except InsufficientBalanceError as e:
+    print("Error:", e)
+
+
+# 7. Using finally to ensure file closes properly
+print("\n----- 7. Using try-except-finally with a file -----")
+
+try:
+    file = open("sample_for_exception.txt", "w")
+    file.write("Testing finally block")
+    print("File written successfully")
+except IOError:
+    print("An error occurred while writing to the file")
+finally:
+    file.close()
+    print("File closed (finally block always runs)")
+
+
+# 8. FileNotFoundError
+print("\n----- 8. Handling FileNotFoundError -----")
+
+try:
+    file = open("this_file_does_not_exist.txt", "r")
+    content = file.read()
+    file.close()
+except FileNotFoundError:
+    print("Error: The file does not exist")
+
+
+# 9. TypeError
+print("\n----- 9. Handling TypeError -----")
+
+try:
+    result = "5" + 10  
+except TypeError as e:
+    print("Error:", e)
+
+
+# 10. AttributeError
+print("\n----- 10. Handling AttributeError -----")
+
+try:
+    num = 100
+    num.append(5)   
+except AttributeError as e:
+    print("Error:", e)
+
+
+# 11. IndexError
+print("\n----- 11. Handling IndexError -----")
+
+try:
+    my_list = [1, 2, 3]
+    print(my_list[10])
+except IndexError as e:
+    print("Error:", e)
+
+
+# 12. Using else block (runs only if no exception occurs)
+print("\n----- 12. Using else block -----")
+
+try:
+    x = 10
+    y = 2
+    result = x / y
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero")
+else:
+    print("No exception occurred. Result:", result)
+
+
+# 13. Logging errors instead of printing
+print("\n----- 13. Logging errors using logging module -----")
+
+import logging
+
+logging.basicConfig(
+    filename="error_log.txt",
+    level=logging.ERROR,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+try:
+    value = 10 / 0
+except ZeroDivisionError as e:
+    logging.error("Division error occurred: %s", e)
+    print("Error occurred and has been logged to error_log.txt")
+
+
+# 14. Input validation system - keeps asking until valid data is entered
+print("\n----- 14. Input validation system -----")
+
+def get_valid_age():
+    while True:
+        try:
+            age = int(input("Enter your age: "))
+            if age <= 0:
+                print("Age must be a positive number. Try again.")
+                continue
+            return age
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
+
+# valid_age = get_valid_age()   # uncomment to test interactively
+# print("Valid age entered:", valid_age)
+print("(Interactive loop defined - uncomment the calls above to test with real input)")
