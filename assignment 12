@@ -1,0 +1,142 @@
+# Constructors in Python
+
+# 1. Default and parameterized constructors (simulated using default values)
+
+class Product:
+    def __init__(self, name=None, price=None):
+        if name is None and price is None:
+            self.name = "Unknown Product"
+            self.price = 0
+        elif price is None:
+            self.name = name
+            self.price = 0
+        else:
+            self.name = name
+            self.price = price
+
+print("----- 1. Default and parameterized constructors -----")
+p1 = Product()
+p2 = Product("Notebook")
+p3 = Product("Laptop", 55000)
+
+print("p1:", p1.name, "-", p1.price)
+print("p2:", p2.name, "-", p2.price)
+print("p3:", p3.name, "-", p3.price)
+
+
+# 2. Calling parent constructor using super()
+
+class Parent:
+    def __init__(self, name):
+        print("Parent constructor called")
+        self.name = name
+
+class Child(Parent):
+    def __init__(self, name, age):
+        super().__init__(name)
+        print("Child constructor called")
+        self.age = age
+
+print("\n----- 2. Calling parent constructor via super() -----")
+child1 = Child("Ravi", 10)
+print("Name:", child1.name)
+print("Age:", child1.age)
+
+
+# 3. Simulating access levels (public, protected, private)
+
+class AccessDemo:
+    def __init__(self):
+        self.public_var = "I am public"
+        self._protected_var = "I am protected (convention only)"
+        self.__private_var = "I am private (name mangled)"
+
+    def show_private(self):
+        print("Accessing private variable from inside the class:", self.__private_var)
+
+print("\n----- 3. Simulating access levels -----")
+obj = AccessDemo()
+
+print("Public:", obj.public_var)
+print("Protected (still accessible, but shouldn't be used directly):", obj._protected_var)
+
+obj.show_private()
+
+# Trying to access private variable directly from outside
+try:
+    print(obj.__private_var)
+except AttributeError as e:
+    print("Error accessing private variable directly:", e)
+
+print("Accessing private variable using name mangling:", obj._AccessDemo__private_var)
+
+
+# 4. Constructor attributes concept
+
+class Student:
+    def __init__(self, name, age, course):
+        self.name = name
+        self.age = age
+        self.course = course
+
+print("\n----- 4. Constructor attributes concept -----")
+student1 = Student("Anjali", 21, "Python Programming")
+
+print("Name:", student1.name)
+print("Age:", student1.age)
+print("Course:", student1.course)
+
+print("All attributes of student1:", student1.__dict__)
+
+
+# 5. Using __str__() for better output
+
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+    def __str__(self):
+        return f"Book(title='{self.title}', author='{self.author}')"
+
+print("\n----- 5. Using __str__() -----")
+book1 = Book("Python Basics", "John Doe")
+print(book1)   
+
+
+# 6. Constructor with *args
+
+class Numbers:
+    def __init__(self, *args):
+        self.values = args
+
+    def show_values(self):
+        print("Stored values:", self.values)
+
+print("\n----- 6. Constructor with *args -----")
+num1 = Numbers(1, 2, 3)
+num2 = Numbers(10, 20, 30, 40, 50)
+
+num1.show_values()
+num2.show_values()
+
+
+# 7. Real-world example: Employee class
+
+class Employee:
+    def __init__(self, name, emp_id, salary):
+        self.name = name
+        self.emp_id = emp_id
+        self.salary = salary
+
+    def __str__(self):
+        return f"Employee[ID={self.emp_id}, Name={self.name}, Salary={self.salary}]"
+
+print("\n----- 7. Real-world example: Employee -----")
+emp1 = Employee("Suresh", 101, 45000)
+emp2 = Employee("Meera", 102, 52000)
+emp3 = Employee("Karan", 103, 38000)
+
+employees = [emp1, emp2, emp3]
+for emp in employees:
+    print(emp)
