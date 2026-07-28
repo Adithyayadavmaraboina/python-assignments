@@ -1,0 +1,196 @@
+# Assignment 7 - Inheritance & Polymorphism in Python
+
+# 1 & 2. Create class hierarchy with specific and common methods
+
+class A:
+    def __init__(self):
+        print("Constructor of A called")
+        self.value = "Value from A"
+
+    def method_a1(self):
+        print("This is method_a1, specific to class A")
+
+    def method_a2(self):
+        print("This is method_a2, specific to class A")
+
+    def common_method(self):
+        print("common_method() called from class A")
+
+
+class B(A):
+    def __init__(self):
+        super().__init__()
+        print("Constructor of B called")
+        self.value = "Value from B"
+
+    def method_b1(self):
+        print("This is method_b1, specific to class B")
+
+    def method_b2(self):
+        print("This is method_b2, specific to class B")
+
+    def common_method(self):
+        print("common_method() called from class B")
+
+
+class C(B):
+    def __init__(self):
+        super().__init__()
+        print("Constructor of C called")
+        self.value = "Value from C"
+
+    def method_c1(self):
+        print("This is method_c1, specific to class C")
+
+    def method_c2(self):
+        print("This is method_c2, specific to class C")
+
+    def common_method(self):
+        print("common_method() called from class C")
+
+
+print("----- 3. Object creation and method calls -----")
+
+obj_a = A()
+obj_b = B()
+obj_c = C()
+
+print("\nCalling specific and common methods on obj_a:")
+obj_a.method_a1()
+obj_a.method_a2()
+obj_a.common_method()
+
+print("\nCalling specific and common methods on obj_b:")
+obj_b.method_a1()   # inherited from A
+obj_b.method_b1()
+obj_b.method_b2()
+obj_b.common_method()
+
+print("\nCalling specific and common methods on obj_c:")
+obj_c.method_a1()   # inherited from A
+obj_c.method_b1()   # inherited from B
+obj_c.method_c1()
+obj_c.method_c2()
+obj_c.common_method()
+
+
+print("\n----- 4. Superclass reference behavior (runtime polymorphism) -----")
+
+ref: A = obj_b
+print("Reference type is A, actual object is B:")
+ref.common_method()
+
+ref = obj_c
+print("Reference type is A, actual object is C:")
+ref.common_method()
+
+
+print("\n----- 5. Access parent method using super() -----")
+
+class B2(A):
+    def common_method(self):
+        super().common_method()
+        print("common_method() called from class B2 (after calling parent)")
+
+
+class C2(B2):
+    def common_method(self):
+        super().common_method()
+        print("common_method() called from class C2 (after calling parent)")
+
+
+obj_c2 = C2()
+print("\nCalling common_method() on obj_c2:")
+obj_c2.common_method()
+
+
+print("\n----- 6. Instance variable behavior -----")
+
+class A3:
+    def __init__(self):
+        self.value = "Value from A3"
+
+
+class B3(A3):
+    def __init__(self):
+        super().__init__()
+        self.value = "Value from B3"
+
+
+class C3(B3):
+    def __init__(self):
+        super().__init__()
+        self.value = "Value from C3"
+
+
+obj_a3 = A3()
+obj_b3 = B3()
+obj_c3 = C3()
+
+print("Accessing 'value' using objects of each class:")
+print("obj_a3.value =", obj_a3.value)
+print("obj_b3.value =", obj_b3.value)
+print("obj_c3.value =", obj_c3.value)
+
+superclass_ref: A3 = obj_c3
+print("\nAccessing 'value' using a superclass reference pointing to obj_c3:")
+print("superclass_ref.value =", superclass_ref.value)
+print("(Note: Python looks at the actual object, not the reference type,")
+print("so this still gives the value set in C3's constructor)")
+
+
+print("\n----- 7. Method call order (constructors) -----")
+print("Creating an object of class C:")
+final_c = C()
+print("\nAs seen above, the order of constructor execution is: A -> B -> C")
+print("This happens because each subclass constructor calls super().__init__() first")
+
+
+print("\n----- 8. Real-world example: Vehicle -> Car -> ElectricCar -----")
+
+class Vehicle:
+    def __init__(self, name):
+        self.name = name
+
+    def start_engine(self):
+        print(self.name, ": Generic vehicle engine starting")
+
+    def stop_engine(self):
+        print(self.name, ": Generic vehicle engine stopping")
+
+
+class Car(Vehicle):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def start_engine(self):
+        print(self.name, ": Car engine starting with ignition key")
+
+    def honk(self):
+        print(self.name, ": Beep beep!")
+
+
+class ElectricCar(Car):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def start_engine(self):
+        print(self.name, ": Electric car powering up silently")
+
+    def check_battery(self):
+        print(self.name, ": Battery level is 90%")
+
+
+vehicle1 = Vehicle("Generic Vehicle")
+car1 = Car("Toyota Corolla")
+electric_car1 = ElectricCar("Tesla Model 3")
+
+print("\nCalling start_engine() on each object:")
+vehicle1.start_engine()
+car1.start_engine()
+electric_car1.start_engine()
+
+print("\nDemonstrating runtime polymorphism with Vehicle reference:")
+vehicles = [vehicle1, car1, electric_car1]
+for v in vehicles:
+    v.start_engine()
