@@ -1,0 +1,151 @@
+# Assignment 3 - Loops & Control Flow in Python
+
+#1. Print a message 10 times using a for loop
+for i in range(10):
+    print("python")
+
+
+#2. Print numbers from 1 to 20 using a while loop
+n = 1
+while n <= 20:
+    print(n)
+    n += 1
+
+
+#3. Equal and not equal check
+a = float(input("\nEnter first number: "))
+b = float(input("Enter second number: "))
+
+if a == b:
+    print("The numbers are equal")
+if a != b:
+    print("The numbers are not equal")
+
+
+#4. Print all even and odd numbers from 1 to 50
+print("\nEven numbers from 1 to 50:")
+for i in range(1, 51):
+    if i % 2 == 0:
+        print(i, end=" ")
+
+print("\n\nOdd numbers from 1 to 50:")
+for i in range(1, 51):
+    if i % 2 != 0:
+        print(i, end=" ")
+
+
+#5. Largest among three numbers
+n1 = float(input("\n\nEnter first number: "))
+n2 = float(input("Enter second number: "))
+n3 = float(input("Enter third number: "))
+
+if n1 >= n2 and n1 >= n3:
+    print("Largest number is", n1)
+elif n2 >= n1 and n2 >= n3:
+    print("Largest number is", n2)
+else:
+    print("Largest number is", n3)
+
+
+#6. Even numbers between 10 and 20 using a while loop
+print("\nEven numbers between 10 and 20:")
+num = 10
+while num <= 20:
+    if num % 2 == 0:
+        print(num, end=" ")
+    num += 1
+
+
+#7. Armstrong number check
+print()
+number = int(input("\nEnter a number to check Armstrong: "))
+temp = number
+total = 0
+digits = len(str(number))
+
+while temp > 0:
+    digit = temp % 10
+    total += digit ** digits
+    temp //= 10
+
+if total == number:
+    print(number, "is an Armstrong number")
+else:
+    print(number, "is not an Armstrong number")
+
+
+#8. Prime number check
+num = int(input("\nEnter a number to check prime: "))
+is_prime = True
+
+if num < 2:
+    is_prime = False
+else:
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+
+if is_prime:
+    print(num, "is a prime number")
+else:
+    print(num, "is not a prime number")
+
+
+#9. Palindrome check
+num = int(input("\nEnter a number to check palindrome: "))
+original = num
+reverse = 0
+
+while num > 0:
+    digit = num % 10
+    reverse = reverse * 10 + digit
+    num //= 10
+
+if original == reverse:
+    print(original, "is a palindrome")
+else:
+    print(original, "is not a palindrome")
+
+
+#10. Even or odd using conditional statements
+num = int(input("\nEnter a number to check even or odd: "))
+
+if num % 2 == 0:
+    print(num, "is even")
+else:
+    print(num, "is odd")
+
+
+#11. Gender identification
+gender = input("\nEnter gender (M/F): ")
+
+if gender == "M":
+    print("Male")
+elif gender == "F":
+    print("Female")
+else:
+    print("Invalid Input")
+
+
+#12. Multiplication table generator
+num = int(input("\nEnter a number for multiplication table: "))
+
+for i in range(1, 11):
+    print(num, "x", i, "=", num * i)
+
+
+#13. Count digits in a number using a loop
+num = int(input("\nEnter a number to count digits: "))
+count = 0
+temp = num
+
+if temp == 0:
+    count = 1
+else:
+    temp = abs(temp)
+    while temp > 0:
+        temp //= 10
+        count += 1
+
+print("Number of digits in", num, "is", count)
