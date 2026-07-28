@@ -1,0 +1,129 @@
+# Assignment 6 - Strings in Python
+
+# 1. Creating strings in different ways
+string1 = 'Hello, this is a single quoted string'
+string2 = "Hello, this is a double quoted string"
+string3 = '''This is a triple quoted string
+using single quotes, can span multiple lines'''
+string4 = """This is a triple quoted string
+using double quotes, can also span multiple lines"""
+
+print("Single quotes:", string1)
+print("\nDouble quotes:", string2)
+print("\nTriple quotes (single):", string3)
+print("\nTriple quotes (double):", string4)
+
+
+# 2. String concatenation using +
+first_name = "Bright"
+last_name = "IT Career"
+full_name = first_name + " " + last_name
+print("\nConcatenated string:", full_name)
+
+
+# 3. Length of a string using built-in function
+sample_string = "Python Programming"
+print("\nLength of string:", len(sample_string))
+
+
+# 4. Extract substring using slicing
+text = "Bright IT Career"
+substring = text[0:6]
+print("\nOriginal string:", text)
+print("Extracted substring:", substring)
+
+
+# 5. Search in string using find() and index()
+sentence = "Python is a powerful programming language"
+word = "powerful"
+not_found_word = "Java"
+
+# Using find()
+position1 = sentence.find(word)
+print("\nUsing find(): position of '" + word + "' is", position1)
+
+position2 = sentence.find(not_found_word)
+if position2 == -1:
+    print("Using find(): '" + not_found_word + "' not found (returns -1)")
+
+# Using index()
+try:
+    position3 = sentence.index(word)
+    print("Using index(): position of '" + word + "' is", position3)
+except ValueError:
+    print("Using index(): '" + word + "' not found")
+
+try:
+    position4 = sentence.index(not_found_word)
+    print("Using index(): position of '" + not_found_word + "' is", position4)
+except ValueError:
+    print("Using index(): '" + not_found_word + "' not found (raises ValueError)")
+
+
+# 6. Compare strings using == and !=
+str1 = "apple"
+str2 = "banana"
+str3 = "apple"
+
+print("\nstr1 == str2:", str1 == str2)
+print("str1 != str2:", str1 != str2)
+print("str1 == str3:", str1 == str3)
+print("str1 != str3:", str1 != str3)
+
+
+# 7. startswith() and endswith()
+filename = "assignment6.py"
+print("\nStarts with 'assignment':", filename.startswith("assignment"))
+print("Ends with '.py':", filename.endswith(".py"))
+print("Ends with '.txt':", filename.endswith(".txt"))
+
+
+# 8. Lexicographical comparison
+word1 = "apple"
+word2 = "banana"
+
+if word1 < word2:
+    print("\n'" + word1 + "' is lexicographically smaller than '" + word2 + "'")
+elif word1 > word2:
+    print("\n'" + word1 + "' is lexicographically greater than '" + word2 + "'")
+else:
+    print("\nBoth strings are equal")
+
+
+# 9. Trim whitespaces using strip()
+padded_string = "   Hello World   "
+print("\nOriginal string: '" + padded_string + "'")
+print("After strip(): '" + padded_string.strip() + "'")
+
+
+# 10. Replace characters using replace()
+original_text = "I like Java programming"
+replaced_text = original_text.replace("Java", "Python")
+print("\nOriginal:", original_text)
+print("After replace:", replaced_text)
+
+
+# 11. Split a string using split()
+sentence2 = "Python is fun to learn"
+words = sentence2.split()
+print("\nOriginal sentence:", sentence2)
+print("Split into list:", words)
+
+csv_line = "apple,banana,orange"
+fruits = csv_line.split(",")
+print("\nCSV string:", csv_line)
+print("Split by comma:", fruits)
+
+
+# 12. Convert integer to string using str()
+num = 100
+str_num = str(num)
+print("\nInteger value:", num, "| Type:", type(num))
+print("String value:", str_num, "| Type:", type(str_num))
+
+
+# 13. Uppercase and lowercase
+mixed_case = "Hello Python World"
+print("\nOriginal string:", mixed_case)
+print("Uppercase:", mixed_case.upper())
+print("Lowercase:", mixed_case.lower())
