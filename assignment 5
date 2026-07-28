@@ -1,0 +1,116 @@
+# Assignment 5 - Class Variables in Python
+
+# 1. Define and access via class name
+class Company:
+    company_name = "Bright IT Career"
+
+print("Accessing via class name:", Company.company_name)
+
+
+# 2. Access via object (instance)
+obj1 = Company()
+print("\nAccessing via instance:", obj1.company_name)
+
+
+# 3. Modify class variable via instance
+class Course:
+    course_name = "Python"
+
+course_obj = Course()
+print("\nBefore modifying:", Course.course_name)
+
+# Note: this creates a NEW instance variable, it does NOT change the class variable
+course_obj.course_name = "Java"
+
+print("After modifying via instance:")
+print("Instance value:", course_obj.course_name)
+print("Class value (unchanged):", Course.course_name)
+
+
+# 4. Modify class variable via class name
+class Product:
+    price = 100
+
+p1 = Product()
+p2 = Product()
+
+print("\nBefore modifying:")
+print("Class value:", Product.price)
+print("p1 value:", p1.price)
+print("p2 value:", p2.price)
+
+Product.price = 200
+
+print("\nAfter modifying via class name:")
+print("Class value:", Product.price)
+print("p1 value:", p1.price)
+print("p2 value:", p2.price)
+
+
+# 5. Class variable vs instance variable
+class Employee:
+    company = "Bright IT Career"   # class variable
+
+    def __init__(self, name):
+        self.name = name           # instance variable
+
+e1 = Employee("Ravi")
+e2 = Employee("Anita")
+
+print("\ne1 name (instance variable):", e1.name)
+print("e2 name (instance variable):", e2.name)
+print("e1 company (class variable):", e1.company)
+print("e2 company (class variable):", e2.company)
+
+# Modifying instance variable affects only that instance
+e1.name = "Ravi Kumar"
+print("\nAfter changing e1's name:")
+print("e1 name:", e1.name)
+print("e2 name (unaffected):", e2.name)
+
+# Modifying class variable via class affects all instances
+Employee.company = "New IT Career"
+print("\nAfter changing class variable 'company':")
+print("e1 company:", e1.company)
+print("e2 company:", e2.company)
+
+
+# 6. Shared counter program
+class Student:
+    student_count = 0   # class variable to track number of students
+
+    def __init__(self, name):
+        self.name = name
+        Student.student_count += 1
+
+s1 = Student("Amit")
+s2 = Student("Priya")
+s3 = Student("Karan")
+
+print("\nTotal number of students:", Student.student_count)
+
+
+# 7. Configuration setting example
+class Config:
+    course_name = "Python Basics"
+
+c1 = Config()
+c2 = Config()
+
+print("\nc1 course_name:", c1.course_name)
+print("c2 course_name:", c2.course_name)
+
+# Modify the shared config using the class name
+Config.course_name = "Advanced Python"
+
+print("\nAfter updating config via class name:")
+print("c1 course_name:", c1.course_name)
+print("c2 course_name:", c2.course_name)
+
+# Modifying via instance creates a separate instance variable, doesn't affect others
+c1.course_name = "Data Science"
+
+print("\nAfter c1 sets its own course_name:")
+print("c1 course_name (instance variable now):", c1.course_name)
+print("c2 course_name (still shared class variable):", c2.course_name)
+print("Class level course_name:", Config.course_name)
