@@ -1,0 +1,235 @@
+# Assignment 4 - Lists (Arrays) in Python
+
+#1. Sum of elements
+def sum_list(lst):
+    total = 0
+    for num in lst:
+        total += num
+    return total
+
+numbers = [10, 20, 30, 40, 50]
+print("Sum =", sum_list(numbers))
+
+
+#2. Average of elements
+def average_list(lst):
+    return sum_list(lst) / len(lst)
+
+print("Average =", average_list(numbers))
+
+
+#3. Find index of an element
+def find_index(lst, value):
+    if value in lst:
+        return lst.index(value)
+    else:
+        return None
+
+search_value = 30
+result = find_index(numbers, search_value)
+if result is not None:
+    print(f"\n{search_value} found at index {result}")
+else:
+    print(f"\n{search_value} not found in the list")
+
+
+#4. Check element presence
+def check_presence(lst, value):
+    return value in lst
+
+print("\nIs 40 present?", check_presence(numbers, 40))
+print("Is 100 present?", check_presence(numbers, 100))
+
+
+#5. Remove an element
+def remove_element(lst, value):
+    if value in lst:
+        lst.remove(value)
+    return lst
+
+sample_list = [1, 2, 3, 4, 5]
+print("\nBefore removing:", sample_list)
+remove_element(sample_list, 3)
+print("After removing 3:", sample_list)
+
+
+#6. Copy a list
+def copy_list(source):
+    destination = []
+    for item in source:
+        destination.append(item)
+    return destination
+
+original = [1, 2, 3, 4]
+copied = copy_list(original)
+print("\nOriginal list:", original)
+print("Copied list:", copied)
+
+
+#7. Insert element at position
+def insert_element(lst, index, value):
+    lst.insert(index, value)
+    return lst
+
+sample_list2 = [10, 20, 30, 40]
+print("\nBefore insert:", sample_list2)
+insert_element(sample_list2, 2, 99)
+print("After inserting 99 at index 2:", sample_list2)
+
+
+#8. Find minimum and maximum
+def find_min_max(lst):
+    smallest = lst[0]
+    largest = lst[0]
+    for num in lst:
+        if num < smallest:
+            smallest = num
+        if num > largest:
+            largest = num
+    return smallest, largest
+
+min_val, max_val = find_min_max(numbers)
+print("\nMinimum =", min_val)
+print("Maximum =", max_val)
+
+
+#9. Reverse a list
+def reverse_list(lst):
+    return lst[::-1]
+
+print("\nOriginal:", numbers)
+print("Reversed:", reverse_list(numbers))
+
+
+#10. Find duplicate elements
+def find_duplicates(lst):
+    duplicates = []
+    seen = []
+    for item in lst:
+        if item in seen and item not in duplicates:
+            duplicates.append(item)
+        else:
+            seen.append(item)
+    return duplicates
+
+dup_list = [1, 2, 3, 2, 4, 5, 1, 6]
+print("\nList:", dup_list)
+print("Duplicates:", find_duplicates(dup_list))
+
+
+#11. Count even and odd numbers
+def count_even_odd(lst):
+    even_count = 0
+    odd_count = 0
+    for num in lst:
+        if num % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+    return even_count, odd_count
+
+evens, odds = count_even_odd([1, 2, 3, 4, 5, 6, 7])
+print("\nEven count =", evens)
+print("Odd count =", odds)
+
+
+#12. Common elements between two lists
+def common_elements(list1, list2):
+    common = []
+    for item in list1:
+        if item in list2 and item not in common:
+            common.append(item)
+    return common
+
+listA = [1, 2, 3, 4, 5]
+listB = [3, 4, 5, 6, 7]
+print("\nCommon elements:", common_elements(listA, listB))
+
+
+#13. Remove duplicates
+def remove_duplicates(lst):
+    new_list = []
+    for item in lst:
+        if item not in new_list:
+            new_list.append(item)
+    return new_list
+
+print("\nOriginal:", dup_list)
+print("Without duplicates:", remove_duplicates(dup_list))
+
+
+#14. Second largest element
+def second_largest(lst):
+    unique_sorted = remove_duplicates(lst)
+    unique_sorted.sort()
+    if len(unique_sorted) < 2:
+        return None
+    return unique_sorted[-2]
+
+test_list = [10, 20, 4, 45, 99, 99]
+print("\nSecond largest in", test_list, "is", second_largest(test_list))
+
+
+#15. Difference between max and min
+def max_min_difference(lst):
+    return max(lst) - min(lst)
+
+print("\nDifference between max and min:", max_min_difference(numbers))
+
+
+#16. Check for specific elements (12 and 23)
+def check_specific(lst):
+    return 12 in lst and 23 in lst
+
+test_list2 = [12, 15, 23, 30]
+print("\nContains both 12 and 23?", check_specific(test_list2))
+
+
+#17. Unique elements only
+def unique_elements(lst):
+    unique = []
+    for item in lst:
+        if item not in unique:
+            unique.append(item)
+    return unique
+
+print("\nUnique elements:", unique_elements(dup_list))
+
+
+#18. Frequency count
+def frequency_count(lst):
+    freq = {}
+    for item in lst:
+        if item in freq:
+            freq[item] += 1
+        else:
+            freq[item] = 1
+    return freq
+
+freq_list = [1, 2, 2, 3, 3, 3, 4]
+print("\nFrequency count:", frequency_count(freq_list))
+
+
+#19. Sort a list without using sort() or sorted()
+def bubble_sort(lst):
+    n = len(lst)
+    sorted_list = lst.copy()
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if sorted_list[j] > sorted_list[j + 1]:
+                sorted_list[j], sorted_list[j + 1] = sorted_list[j + 1], sorted_list[j]
+    return sorted_list
+
+unsorted_list = [5, 2, 9, 1, 7]
+print("\nUnsorted:", unsorted_list)
+print("Sorted (bubble sort):", bubble_sort(unsorted_list))
+
+
+#20. Merge two lists without duplicates
+def merge_without_duplicates(list1, list2):
+    merged = list1 + list2
+    return remove_duplicates(merged)
+
+listC = [1, 2, 3]
+listD = [3, 4, 5]
+print("\nMerged without duplicates:", merge_without_duplicates(listC, listD))
