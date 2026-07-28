@@ -1,0 +1,5 @@
+Hello World
+This is a sample text file
+Used for demonstrating file handling in Python
+It has multiple lines
+And multiple words
